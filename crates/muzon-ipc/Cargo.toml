@@ -9,11 +9,14 @@ repository.workspace = true
 description = "Muzon IPC: Unix socket (XDG_RUNTIME_DIR) and D-Bus surface for headless muzon-core."
 
 [dependencies]
-muzon-core = { workspace = true }
 anyhow = { workspace = true }
+libc = "0.2"
+postcard = { version = "1.0", default-features = false, features = ["alloc", "use-std"] }
 serde = { workspace = true }
 thiserror = { workspace = true }
+tokio = { version = "1.40", features = ["rt-multi-thread", "macros", "sync", "net", "io-util", "fs", "process", "signal", "time"] }
 tracing = { workspace = true }
 
 [dev-dependencies]
 serde_json = "1.0"
+tempfile = "3.10"

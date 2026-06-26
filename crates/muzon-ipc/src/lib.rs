@@ -10,14 +10,20 @@
 //!
 //! See TZ.md §3.1.2 (process model), §3.6 (UI).
 
+pub mod client;
 pub mod library;
 pub mod playback;
 pub mod queue;
+pub mod request;
+pub mod server;
 pub mod skin;
 
+pub use client::{ClientError, IpcClient};
 pub use library::{AlbumRef, AlbumWithTracks, ArtistRef, LibraryRequest, LibraryResponse, PlaylistRef};
 pub use playback::{
     PlaybackRequest, PlaybackResponse, PlaybackStatus, PlayingState, TrackRef,
 };
 pub use queue::{QueueEntry, QueueRequest, QueueSnapshot, RepeatMode};
+pub use request::{IpcRequest, IpcResponse};
+pub use server::{default_socket_path, ensure_socket_absent, serve, set_socket_perms, ServerError};
 pub use skin::{SkinCssPayload, SkinInfo, SkinRequest, SkinResponse};

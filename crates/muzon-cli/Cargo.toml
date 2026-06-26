@@ -16,10 +16,12 @@ path = "src/main.rs"
 muzon-core = { workspace = true }
 muzon-library = { workspace = true }
 muzon-audio = { workspace = true }
+muzon-ipc = { workspace = true }
+muzon-ui = { workspace = true }
 anyhow = { workspace = true }
 clap = { workspace = true }
 signal-hook = "0.3"
-tokio = { version = "1.40", features = ["rt-multi-thread", "macros", "sync"] }
+tokio = { version = "1.40", features = ["rt-multi-thread", "macros", "sync", "net", "io-util", "fs", "process", "signal", "time"] }
 tokio-util = { version = "0.7", features = ["rt"] }
 tracing = { workspace = true }
 

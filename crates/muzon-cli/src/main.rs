@@ -16,6 +16,9 @@
 //! The full surface (`muzon status`, `muzon queue add`, `muzon
 //! playlist create`, `muzon skin install`, etc.) lands in v0.2.0+.
 
+mod ctl;
+mod headless;
+
 use std::path::PathBuf;
 use std::process::ExitCode;
 
@@ -70,6 +73,20 @@ enum Command {
     Library {
         #[command(subcommand)]
         action: LibraryAction,
+    },
+    /// Run as a headless daemon. Exposes the IPC socket at the
+    /// default path (or $MUZON_SOCKET_PATH); `muzonctl` and
+    /// the Tauri shell attach to it. Stops on SIGINT/SIGTERM.
+    Headless,
+    /// Control a running headless core. Forwards each
+    /// subcommand to the core over the Unix socket.
+    #[command(disable_help_flag = false)]
+    Ctl {
+        /// Override the IPC socket path (default: $XDG_RUNTIME_DIR/muzon.sock).
+        #[arg(long)]
+        socket: Option<PathBuf>,
+        #[command(subcommand)]
+        command: ctl::CtlCommand,
     },
 }
 
@@ -140,6 +157,14 @@ async fn main() -> ExitCode {
         Some(Command::Library { action }) => match action {
             LibraryAction::Scan { path } => run_library_scan(&path, &paths, &cfg).await,
         },
+        Some(Command::Headless) => {
+            drop(_guard);
+            headless::run()
+        }
+        Some(Command::Ctl { socket, command }) => {
+            drop(_guard);
+            ctl::run(socket, command)
+        }
     }
 }
 
