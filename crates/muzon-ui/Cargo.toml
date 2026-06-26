@@ -10,5 +10,12 @@ description = "Muzon UI: Tauri 2.x shell that hosts the React frontend and rende
 
 [dependencies]
 muzon-core = { workspace = true }
+muzon-ipc = { workspace = true }
+muzon-skin = { workspace = true }
+muzon-audio = { workspace = true }
 anyhow = { workspace = true }
+serde = { workspace = true }
+serde_json = "1.0"
+tauri = { version = "2", features = [] }
+thiserror = { workspace = true }
 tracing = { workspace = true }
