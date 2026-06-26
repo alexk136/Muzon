@@ -92,6 +92,8 @@ pub struct LayoutSection {
     pub main_template: String,
     #[serde(default)]
     pub mini_template: String,
+    #[serde(default)]
+    pub musiclab_template: String,
     pub grid: String,
 }
 
@@ -162,6 +164,11 @@ pub use validator::{
     check_font_license, validate_manifest, validate_package_layout, ValidatorError, MAX_FILES,
     MAX_UNCOMPRESSED_BYTES,
 };
+
+// Skins that have a MusicLab template (issue 0021) gain a
+// `musiclab_template` field in their `LayoutSection`. v0.3.0
+// minimum: Modern ships the M1 (AI Assistant) template; the
+// 3 other skins ship stubs in 0026 / 0030 / 0033.
 
 /// Return the default skin id (`"modern"` per the 0005 decision).
 
