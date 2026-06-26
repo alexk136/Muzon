@@ -1,0 +1,142 @@
+<div class="app">
+  <header class="top">
+    <div class="menu"><span>📁 File</span><span>▶ Playback</span><span>📚 Library</span><span>🧠 MusicLab</span></div>
+    <div class="crumbs">Library / <strong>All Tracks</strong> / Now Playing</div>
+    <div class="top-stats">
+      <span>📊 {{track_count}} tracks</span><span>💾 {{library_size}}</span>
+      <span class="ok">✓ {{tagged_count}} tagged</span><span class="warn">⚠ {{issue_count}} issues</span>
+    </div>
+  </header>
+  <aside class="side">
+    <div class="side-section">
+      <div class="side-title">Browser</div>
+      <div class="tree-item active"><span>📁</span> All Music <span class="count">{{track_count}}</span></div>
+      <div class="tree-item"><span>⭐</span> Highly Rated <span class="count">{{highly_rated_count}}</span></div>
+      <div class="tree-item"><span>🆕</span> Recently Added <span class="count">{{recently_added_count}}</span></div>
+      <div class="tree-item"><span>🕐</span> Recently Played <span class="count">{{recently_played_count}}</span></div>
+    </div>
+    <div class="side-section">
+      <div class="side-title">Playlists</div>
+      <div class="tree-item"><span>📋</span> Synthwave Essentials <span class="count">87</span></div>
+      <div class="tree-item"><span>🧠</span> AI: Focus Mix <span class="count">31</span></div>
+      <div class="tree-item"><span>🧠</span> AI: Late Night <span class="count">54</span></div>
+    </div>
+    <div class="side-section">
+      <div class="side-title">MusicLab</div>
+      <div class="tree-item"><span>🗺</span> Mood Map</div>
+      <div class="tree-item"><span>🔍</span> Similarity Search</div>
+      <div class="tree-item"><span>🎯</span> Quality Check</div>
+      <div class="tree-item"><span>🤖</span> AI Assistant</div>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="toolbar">
+      <input type="text" placeholder="🔍 Filter…">
+      <span class="fc">Year: 2010-2020</span>
+      <span class="fc active">Genre: {{track_genre}}</span>
+      <span class="fc">Quality: ≥ FLAC</span>
+      <span class="fc">BPM: 90-120</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="num">#</th>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Album</th>
+            <th class="num">Time</th>
+            <th>Q</th>
+            <th class="num">BPM</th>
+            <th>Tags</th>
+            <th class="num">Plays</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="playing">
+            <td class="num">▶ 01</td>
+            <td>{{track_title}}</td>
+            <td>{{track_artist}}</td>
+            <td>{{track_album}}</td>
+            <td class="num">{{duration_label}}</td>
+            <td><span class="q">FLAC</span></td>
+            <td class="num">{{track_bpm}}</td>
+            <td><span class="ai-tag">+</span></td>
+            <td class="num">{{play_count}}</td>
+          </tr>
+          <tr><td class="num">02</td><td>A Real Hero</td><td>College</td><td>Drive OST</td><td class="num">04:28</td><td><span class="q">FLAC</span></td><td class="num">88</td><td><span class="ai-tag">+</span></td><td class="num">142</td></tr>
+          <tr><td class="num">03</td><td>Nightcall</td><td>Kavinsky</td><td>OutRun</td><td class="num">04:17</td><td><span class="q">FLAC</span></td><td class="num">84</td><td><span class="ai-tag">+</span></td><td class="num">98</td></tr>
+          <tr><td class="num">04</td><td>Sun</td><td>The Neighbourhood</td><td>Wiped Out</td><td class="num">03:54</td><td><span class="q">MP3</span></td><td class="num">112</td><td></td><td class="num">76</td></tr>
+          <tr><td class="num">05</td><td>Stranger Things</td><td>K. Dixon</td><td>ST S1 OST</td><td class="num">02:54</td><td><span class="q">OPUS</span></td><td class="num">96</td><td><span class="ai-tag">+</span></td><td class="num">234</td></tr>
+          <tr><td class="num">06</td><td>Resonance</td><td>HOME</td><td>Odyssey</td><td class="num">03:32</td><td><span class="q">FLAC</span></td><td class="num">102</td><td><span class="ai-tag">+</span></td><td class="num">56</td></tr>
+          <tr><td class="num">07</td><td>Innerbloom</td><td>RÜFÜS DU SOL</td><td>Bloom</td><td class="num">04:42</td><td><span class="q">FLAC</span></td><td class="num">120</td><td><span class="ai-tag">+</span></td><td class="num">189</td></tr>
+          <tr><td class="num">08</td><td>Gamma Ray</td><td>Bastille</td><td>Wild World</td><td class="num">03:18</td><td><span class="q">FLAC</span></td><td class="num">128</td><td><span class="ai-tag">+</span></td><td class="num">67</td></tr>
+          <tr><td class="num">09</td><td>Reptilia</td><td>The Strokes</td><td>Room on Fire</td><td class="num">03:42</td><td><span class="q">MP3</span></td><td class="num">158</td><td></td><td class="num">112</td></tr>
+          <tr><td class="num">10</td><td>Breathe (In The Air)</td><td>Pink Floyd</td><td>Dark Side</td><td class="num">02:43</td><td><span class="q">FLAC</span></td><td class="num">62</td><td><span class="ai-tag">+</span></td><td class="num">389</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <aside class="right">
+    <div class="right-tabs">
+      <div class="rt">Lyrics</div>
+      <div class="rt active">Metadata</div>
+      <div class="rt">AI</div>
+    </div>
+    <div class="meta-panel">
+      <div class="mr"><span class="k">File</span><span class="v">{{track_path}}</span></div>
+      <div class="mr"><span class="k">Format</span><span class="v">{{track_codec}}</span></div>
+      <div class="mr"><span class="k">Sample rate</span><span class="v">44.1 kHz</span></div>
+      <div class="mr"><span class="k">Bit depth</span><span class="v">24-bit</span></div>
+      <div class="mr"><span class="k">Bitrate</span><span class="v">{{track_bitrate}} kbps</span></div>
+      <div class="mr"><span class="k">Duration</span><span class="v">{{duration_label}}</span></div>
+      <div class="mr"><span class="k">Size</span><span class="v">87.4 MB</span></div>
+      <div class="mr"><span class="k">ReplayGain</span><span class="v ok">-7.2 dB</span></div>
+      <div class="mr"><span class="k">Fingerprint</span><span class="v ok">✓ computed</span></div>
+      <div class="mr"><span class="k">Embedding</span><span class="v warn">pending</span></div>
+      <div class="mr"><span class="k">BPM</span><span class="v">{{track_bpm}}</span></div>
+      <div class="mr"><span class="k">Key</span><span class="v">{{track_key}}</span></div>
+      <div class="mr"><span class="k">Loudness</span><span class="v">-14.2 LUFS</span></div>
+      <div class="mr"><span class="k">MusicBrainz</span><span class="v ok">matched</span></div>
+      <div class="mr"><span class="k">Cover</span><span class="v ok">embedded</span></div>
+      <div class="mr"><span class="k">Lyrics</span><span class="v warn">unsynced</span></div>
+      <div class="mr"><span class="k">Plays</span><span class="v">{{play_count}}</span></div>
+    </div>
+  </aside>
+  <footer class="player">
+    <div class="p-now">
+      <div class="p-cover">♪</div>
+      <div class="p-info">
+        <div class="p-title">{{track_title}}</div>
+        <div class="p-sub">{{track_artist}}</div>
+        <div class="p-tech">{{track_codec}} {{track_bitrate}}kbps</div>
+      </div>
+    </div>
+    <div class="p-center">
+      <div class="p-buttons">
+        <button class="p-btn" title="Shuffle">SHF</button>
+        <button class="p-btn" title="Previous">PRE</button>
+        <button class="p-btn p-play" title="Play/Pause">{{play_pause_label}}</button>
+        <button class="p-btn" title="Next">NXT</button>
+        <button class="p-btn" title="Repeat">RPT</button>
+      </div>
+      <div class="p-progress">
+        <span>{{position_label}}</span>
+        <div class="p-pbar"><div class="p-pfill" style="width: {{progress_pct}}%;"></div></div>
+        <span>{{duration_label}}</span>
+      </div>
+    </div>
+    <div class="p-right">
+      <div class="p-spect">
+        <div class="p-sp"></div><div class="p-sp"></div><div class="p-sp"></div><div class="p-sp"></div>
+        <div class="p-sp"></div><div class="p-sp"></div><div class="p-sp"></div><div class="p-sp"></div>
+        <div class="p-sp"></div><div class="p-sp"></div><div class="p-sp"></div><div class="p-sp"></div>
+        <div class="p-sp"></div><div class="p-sp"></div><div class="p-sp"></div><div class="p-sp"></div>
+      </div>
+      <div class="p-row2">
+        <span>Vol</span>
+        <div class="vol"><div class="vol-fill" style="width: 70%;"></div></div>
+      </div>
+    </div>
+  </footer>
+</div>

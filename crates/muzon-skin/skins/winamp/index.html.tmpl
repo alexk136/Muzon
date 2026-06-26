@@ -1,0 +1,56 @@
+<div class="winamp">
+  <div class="titlebar">
+    <div class="titlebar-left">Muzon — {{skin_name}} Skin</div>
+    <div class="titlebar-right">
+      <button>_</button><button>▢</button><button>×</button>
+    </div>
+  </div>
+  <div class="player-pane">
+    <div class="display">
+      <div class="display-title">{{track_title}}</div>
+      <div class="display-sub">{{track_artist}}</div>
+      <div class="display-bars">
+        <div class="db"></div><div class="db"></div><div class="db"></div><div class="db"></div><div class="db"></div>
+        <div class="db"></div><div class="db"></div><div class="db"></div><div class="db"></div><div class="db"></div>
+        <div class="db"></div><div class="db"></div>
+      </div>
+      <div class="display-info"><span>{{position_label}}</span><span>{{duration_label}}</span></div>
+    </div>
+    <div class="controls">
+      <button class="ctrl-btn">⏮ PREV</button>
+      <button class="ctrl-btn play">{{play_pause_label}}</button>
+      <button class="ctrl-btn">⏭ NEXT</button>
+      <button class="ctrl-btn">🔀 SHUFFLE</button>
+      <button class="ctrl-btn">🔁 REPEAT</button>
+      <button class="ctrl-btn">⏹ STOP</button>
+    </div>
+    <div class="knobs">
+      <div class="knob-wrap"><div class="knob"></div><div class="knob-label">VOL</div></div>
+      <div class="knob-wrap"><div class="knob"></div><div class="knob-label">BAL</div></div>
+      <div class="knob-wrap"><div class="knob"></div><div class="knob-label">EQ</div></div>
+    </div>
+    <div class="skin-info">🎨 Skin: «{{skin_name}}» by Muzon contributors<br>📂 {{track_path}}</div>
+  </div>
+  <div class="playlist-pane">
+    <div class="pl-header">
+      <span class="pl-title">📋 PLAYLIST — Now Playing</span>
+      <div class="pl-actions"><button>+ ADD</button><button>📤 EXPORT</button><button>🧠 AI</button></div>
+    </div>
+    <div class="pl-list">
+      <div class="pl-row playing"><span class="pl-num">►01</span><span class="pl-title-col">{{track_title}}<span class="pl-quality">FLAC</span></span><span class="pl-artist-col">{{track_artist}}</span><span class="pl-time">{{duration_label}}</span><span class="pl-bpm">{{track_bpm}}</span></div>
+      <div class="pl-row"><span class="pl-num">02</span><span class="pl-title-col">A Real Hero<span class="pl-quality">FLAC</span></span><span class="pl-artist-col">College</span><span class="pl-time">04:28</span><span class="pl-bpm">88</span></div>
+      <div class="pl-row"><span class="pl-num">03</span><span class="pl-title-col">Nightcall</span><span class="pl-artist-col">Kavinsky</span><span class="pl-time">04:17</span><span class="pl-bpm">84</span></div>
+      <div class="pl-row"><span class="pl-num">04</span><span class="pl-title-col">Sun</span><span class="pl-artist-col">The Neighbourhood</span><span class="pl-time">03:54</span><span class="pl-bpm">112</span></div>
+      <div class="pl-row"><span class="pl-num">05</span><span class="pl-title-col">Stranger Things</span><span class="pl-artist-col">K. Dixon, M. Stein</span><span class="pl-time">02:54</span><span class="pl-bpm">96</span></div>
+      <div class="pl-row"><span class="pl-num">06</span><span class="pl-title-col">Resonance<span class="pl-quality">FLAC</span></span><span class="pl-artist-col">HOME</span><span class="pl-time">03:32</span><span class="pl-bpm">102</span></div>
+      <div class="pl-row"><span class="pl-num">07</span><span class="pl-title-col">Innerbloom</span><span class="pl-artist-col">RÜFÜS DU SOL</span><span class="pl-time">04:42</span><span class="pl-bpm">120</span></div>
+      <div class="pl-row"><span class="pl-num">08</span><span class="pl-title-col">Gamma Ray</span><span class="pl-artist-col">Bastille</span><span class="pl-time">03:18</span><span class="pl-bpm">128</span></div>
+      <div class="pl-row"><span class="pl-num">09</span><span class="pl-title-col">Reptilia</span><span class="pl-artist-col">The Strokes</span><span class="pl-time">03:42</span><span class="pl-bpm">158</span></div>
+      <div class="pl-row"><span class="pl-num">10</span><span class="pl-title-col">Breathe (In The Air)<span class="pl-quality mp3">MP3</span></span><span class="pl-artist-col">Pink Floyd</span><span class="pl-time">02:43</span><span class="pl-bpm">62</span></div>
+    </div>
+    <div class="pl-footer">
+      <span>10 tracks · 0:35:12</span>
+      <span class="ai-stats">🧠 AI: 0 дубликатов · 0 без тегов</span>
+    </div>
+  </div>
+</div>

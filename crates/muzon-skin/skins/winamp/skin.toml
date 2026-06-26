@@ -1,7 +1,7 @@
 [skin]
 id = "winamp"
 name = "Winamp Skin"
-version = "0.0.0"
+version = "0.1.0"
 author = "Muzon contributors"
 license = "MIT OR Apache-2.0"
 min_muzon_version = "0.3.0"

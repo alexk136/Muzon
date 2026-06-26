@@ -1,0 +1,84 @@
+<div class="app">
+  <header class="top">
+    <div class="logo">MUZON</div>
+    <nav class="top-nav">
+      <a>Player</a>
+      <a>Library</a>
+      <a class="active">MusicLab</a>
+      <a>Settings</a>
+    </nav>
+    <div class="top-right">
+      <button title="Search">🔍</button>
+      <button title="Skin">🎨</button>
+      <button title="Mini-mode">⤢</button>
+    </div>
+  </header>
+  <main class="main">
+    <div class="cover">
+      <span class="playing-badge">⏵ Playing</span>
+      <div class="lyrics">"When the city lights come on<br>And the night begins to fall<br>We dance like nobody's watching"</div>
+      <div class="cover-icon">♪</div>
+    </div>
+    <div class="info">
+      <div class="eyebrow">{{track_album}} · {{track_year}}</div>
+      <h1 class="title">{{track_title}}</h1>
+      <div class="artist">{{track_artist}} · {{track_genre}} · {{track_country}}</div>
+      <div class="progress-row">
+        <span>{{position_label}}</span>
+        <div class="progress-bar"><div class="progress-fill" style="width: {{progress_pct}}%;"></div></div>
+        <span>{{duration_label}}</span>
+      </div>
+      <div class="controls">
+        <button class="cbtn" title="Shuffle">SHF</button>
+        <button class="cbtn" title="Previous">PRE</button>
+        <button class="cbtn play" title="Play/Pause">{{play_pause_label}}</button>
+        <button class="cbtn" title="Next">NXT</button>
+        <button class="cbtn" title="Repeat">RPT</button>
+      </div>
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <div class="meta-k">Quality</div>
+          <div class="meta-v">{{track_codec}}</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-k">Tempo</div>
+          <div class="meta-v">{{track_bpm}} BPM</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-k">Key</div>
+          <div class="meta-v">{{track_key}}</div>
+        </div>
+      </div>
+      <div class="ai-section">
+        <div class="ai-title"><span class="dot"></span> MusicLab Analysis</div>
+        <div class="ai-pills">
+          <span class="ai-pill">Energetic</span>
+          <span class="ai-pill">Euphoric</span>
+          <span class="ai-pill">Night</span>
+          <span class="ai-pill">Driving</span>
+          <span class="ai-pill">Cinematic</span>
+          <span class="ai-pill">Energy 0.78</span>
+          <span class="ai-pill">Valence 0.65</span>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="player">
+    <div class="player-left">
+      <button class="qbtn">☰ Queue · {{queue_size}}</button>
+      <button class="qbtn">🧠 AI: Find similar</button>
+      <button class="qbtn">➕ To playlist</button>
+    </div>
+    <div class="spectrum">
+      <div class="sp-bar"></div><div class="sp-bar"></div><div class="sp-bar"></div><div class="sp-bar"></div>
+      <div class="sp-bar"></div><div class="sp-bar"></div><div class="sp-bar"></div><div class="sp-bar"></div>
+      <div class="sp-bar"></div><div class="sp-bar"></div><div class="sp-bar"></div><div class="sp-bar"></div>
+      <div class="sp-bar"></div><div class="sp-bar"></div><div class="sp-bar"></div><div class="sp-bar"></div>
+    </div>
+    <div class="player-right">
+      <span>Vol</span>
+      <div class="vol-bar"><div class="vol-fill" style="width: 70%;"></div></div>
+      <button class="qbtn">⤢ Mini-mode</button>
+    </div>
+  </footer>
+</div>
