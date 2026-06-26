@@ -1,0 +1,23 @@
+[skin]
+id = "dense_pro"
+name = "Dense Pro Skin"
+version = "0.0.0"
+author = "Muzon contributors"
+license = "MIT OR Apache-2.0"
+min_muzon_version = "0.3.0"
+
+[theme]
+mode = "dark"
+accent = "#60a5fa"
+palette = "theme.css"
+
+[layout]
+main_template = "index.html.tmpl"
+mini_template = ""
+grid = "top-sidebar-main-right-player"
+
+[layers]
+background = ["assets/bg/*"]
+main       = ["assets/main/*"]
+buttons    = ["assets/buttons/*"]
+spectrum   = ["assets/spectrum/*"]

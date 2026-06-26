@@ -1,0 +1,95 @@
+<div class="app">
+  <header class="topbar">
+    <div class="logo">Muzon</div>
+    <nav class="nav-tabs">
+      <button class="nav-tab">Player</button>
+      <button class="nav-tab">Library</button>
+      <button class="nav-tab active">MusicLab</button>
+      <button class="nav-tab">Settings</button>
+    </nav>
+    <div class="search"><input type="text" placeholder="Search..."></div>
+    <div class="topbar-actions">
+      <button class="icon-btn" title="Skin">Theme</button>
+      <button class="icon-btn" title="Notifications">Notes</button>
+      <button class="icon-btn" title="Profile">User</button>
+    </div>
+  </header>
+  <aside class="sidebar">
+    <div class="side-section">
+      <div class="side-title">Navigation</div>
+      <div class="side-item active"><span class="icon">Play</span> Now playing</div>
+      <div class="side-item"><span class="icon">Disc</span> Albums <span class="count">238</span></div>
+      <div class="side-item"><span class="icon">Artist</span> Artists <span class="count">102</span></div>
+      <div class="side-item"><span class="icon">Note</span> Genres <span class="count">14</span></div>
+    </div>
+    <div class="side-section">
+      <div class="side-title">Playlists</div>
+      <div class="side-item"><span class="icon">Folder</span> All music <span class="count">3,421</span></div>
+      <div class="side-item"><span class="icon">Star</span> Favourites <span class="count">87</span></div>
+      <div class="side-item"><span class="icon">AI</span> AI: For focus <span class="count">24</span></div>
+      <div class="side-item"><span class="icon">AI</span> AI: Rainy evening <span class="count">31</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Today</div>
+      <div class="value">{{today_listen_time}}</div>
+      <div class="sub">played {{today_track_count}} tracks</div>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="now-playing-grid">
+      <div class="cover"></div>
+      <div class="track-info">
+        <span class="track-label">Now playing</span>
+        <h1 class="track-title">{{track_title}}</h1>
+        <p class="track-artist"><a href="#">{{track_artist}}</a> &middot; <a href="#" style="color: var(--text-2);">{{track_album}}</a> &middot; {{track_year}}</p>
+        <div class="track-meta">
+          <span>Dur {{track_duration}}</span>
+          <span>{{track_codec}}</span>
+          <span>{{track_bpm}} BPM &middot; {{track_key}}</span>
+          <span>{{track_mood}}</span>
+        </div>
+        <div class="spectrum" aria-label="Spectrum visualizer">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+        <div class="ai-row">
+          <div class="ai-chip"><span class="dot"></span> Similar: {{similar_count}} tracks</div>
+          <div class="ai-chip"><span class="dot"></span> AI playlist: {{ai_playlist_name}}</div>
+          <div class="ai-chip"><span class="dot"></span> Played {{play_count}} times</div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="player">
+    <div class="p-track">
+      <div class="p-cover">Note</div>
+      <div class="p-info">
+        <div class="p-title">{{track_title}}</div>
+        <div class="p-artist">{{track_artist}}</div>
+      </div>
+    </div>
+    <div class="p-center">
+      <div class="p-buttons">
+        <button class="p-btn" title="Shuffle">SHF</button>
+        <button class="p-btn" title="Previous">PRE</button>
+        <button class="p-btn p-play" title="Play/Pause">{{play_pause_label}}</button>
+        <button class="p-btn" title="Next">NXT</button>
+        <button class="p-btn" title="Repeat">RPT</button>
+      </div>
+      <div class="p-progress">
+        <span>{{position_label}}</span>
+        <div class="p-progress-bar"><div class="p-progress-fill" style="width: {{progress_pct}}%;"></div></div>
+        <span>{{duration_label}}</span>
+      </div>
+    </div>
+    <div class="p-right">
+      <button class="p-btn" title="Queue">QUE</button>
+      <div class="p-volume">
+        <span>Vol</span>
+        <div class="p-volume-bar"><div class="p-volume-fill" style="width: {{volume_pct}}%;"></div></div>
+      </div>
+    </div>
+  </footer>
+</div>

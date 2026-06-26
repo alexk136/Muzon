@@ -1,0 +1,23 @@
+[skin]
+id = "modern"
+name = "Modern Skin"
+version = "0.1.0"
+author = "Muzon contributors"
+license = "MIT OR Apache-2.0"
+min_muzon_version = "0.2.0"
+
+[theme]
+mode = "dark"
+accent = "#8b5cf6"
+palette = "theme.css"
+
+[layout]
+main_template = "index.html.tmpl"
+mini_template = ""
+grid = "topbar-sidebar-main-player"
+
+[layers]
+background = ["assets/bg/*"]
+main       = ["assets/main/*"]
+buttons    = ["assets/buttons/*"]
+spectrum   = ["assets/spectrum/*"]

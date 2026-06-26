@@ -1,0 +1,23 @@
+[skin]
+id = "winamp"
+name = "Winamp Skin"
+version = "0.0.0"
+author = "Muzon contributors"
+license = "MIT OR Apache-2.0"
+min_muzon_version = "0.3.0"
+
+[theme]
+mode = "dark"
+accent = "#00ff88"
+palette = "theme.css"
+
+[layout]
+main_template = "index.html.tmpl"
+mini_template = ""
+grid = "titlebar-player-playlist"
+
+[layers]
+background = ["assets/bg/*"]
+main       = ["assets/main/*"]
+buttons    = ["assets/buttons/*"]
+spectrum   = ["assets/spectrum/*"]
