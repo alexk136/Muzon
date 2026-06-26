@@ -3,5 +3,12 @@
 //!
 //! Owns the SQLite schema, migrations, FTS5 search, library scanner
 //! (walkdir + lofty + notify), tag reading, and the audio-embedding
-//! pipeline. Real implementations land in issues 0007 and 0008; this
-//! file is a stub for the 0005 workspace skeleton.
+//! pipeline. The schema and typed accessors land in issue 0007; the
+//! scanner / watcher / tags land in issue 0008.
+
+pub mod db;
+pub mod schema;
+
+pub use db::Library;
+pub use schema::{Codec, DbPool, Track};
+
