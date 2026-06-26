@@ -11,12 +11,17 @@ description = "Muzon library: scan, watch, tags, SQLite, FTS5, embeddings."
 [dependencies]
 muzon-core = { workspace = true }
 anyhow = { workspace = true }
+lofty = "0.21"
+notify = "6.1"
+notify-debouncer-full = "0.3"
 serde = { workspace = true }
 sqlx = { version = "0.8", default-features = false, features = ["runtime-tokio", "sqlite", "macros", "migrate"] }
 thiserror = { workspace = true }
 tokio = { version = "1.40", features = ["rt-multi-thread", "macros", "sync"] }
+tokio-util = { version = "0.7", features = ["rt"] }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
+walkdir = "2.5"
 
 [dev-dependencies]
 tempfile = "3.10"

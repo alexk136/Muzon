@@ -107,6 +107,12 @@ impl Track {
     }
 }
 
+// Free function alias used by the scanner. Kept as a free fn for
+// ergonomic call sites that already have a `Path` value.
+pub fn codec_from_path(path: impl AsRef<Path>) -> Codec {
+    Track::codec_from_path(path)
+}
+
 impl Library {
     /// Upsert a track by `path`. Returns the row id of the inserted
     /// or updated row. The caller fills in metadata fields; this
