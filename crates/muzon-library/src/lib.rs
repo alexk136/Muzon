@@ -18,6 +18,7 @@ pub mod quality;
 pub mod scanner;
 pub mod schema;
 pub mod search;
+pub mod smart_playlist;
 pub mod tagwrite;
 pub mod tags;
 
@@ -25,6 +26,10 @@ pub use autotag::{AutoTagMatch, AutoTagger};
 pub use duplicates::{find_duplicates, DuplicateGroup, Strategy, TrackForDedup};
 pub use musicbrainz::{Artist, MusicBrainzClient, MusicBrainzError, Recording, Release};
 pub use quality::{build_gap_analysis, compute_quality_stats, GapAnalysis, GapItem, QualityStats, QualityStatsInput};
+pub use smart_playlist::{
+    evaluate, filter, parse, update_playlist, ParseError, PlaylistSource, Predicate,
+    SmartPlaylist, TrackSnapshot,
+};
 pub use tagwrite::{write_tags_with_backup, TagEdit, TagWriteError};
 
 #[cfg(test)]
