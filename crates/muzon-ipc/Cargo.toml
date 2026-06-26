@@ -11,6 +11,7 @@ description = "Muzon IPC: Unix socket (XDG_RUNTIME_DIR) and D-Bus surface for he
 [dependencies]
 anyhow = { workspace = true }
 libc = "0.2"
+muzon-core = { workspace = true }
 postcard = { version = "1.0", default-features = false, features = ["alloc", "use-std"] }
 serde = { workspace = true }
 thiserror = { workspace = true }

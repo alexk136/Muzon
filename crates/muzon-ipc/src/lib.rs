@@ -16,6 +16,7 @@ pub mod playback;
 pub mod queue;
 pub mod request;
 pub mod server;
+pub mod settings;
 pub mod skin;
 
 pub use client::{ClientError, IpcClient};
@@ -26,4 +27,5 @@ pub use playback::{
 pub use queue::{QueueEntry, QueueRequest, QueueSnapshot, RepeatMode};
 pub use request::{IpcRequest, IpcResponse};
 pub use server::{default_socket_path, ensure_socket_absent, serve, set_socket_perms, ServerError};
+pub use settings::{SettingsRequest, SettingsResponse, SettingsSnapshot};
 pub use skin::{SkinCssPayload, SkinInfo, SkinRequest, SkinResponse};

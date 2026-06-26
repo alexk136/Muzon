@@ -2614,6 +2614,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "libc",
+ "muzon-core",
  "postcard",
  "serde",
  "serde_json",
