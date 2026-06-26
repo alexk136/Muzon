@@ -12,6 +12,7 @@ pub mod db;
 pub mod duplicates;
 pub mod embeddings;
 pub mod features;
+pub mod mood_map;
 pub mod musicbrainz;
 pub mod path_parse;
 pub mod playback_log;
@@ -27,6 +28,7 @@ pub mod vec_index;
 pub use autotag::{AutoTagMatch, AutoTagger};
 pub use duplicates::{find_duplicates, DuplicateGroup, Strategy, TrackForDedup};
 pub use embeddings::{compute_embedding, estimate_embed_time, Embedding, Model};
+pub use mood_map::{project_and_cluster, HdbscanParams, MoodError, MoodMap, MoodPoint, UmapParams};
 pub use musicbrainz::{Artist, MusicBrainzClient, MusicBrainzError, Recording, Release};
 pub use quality::{build_gap_analysis, compute_quality_stats, GapAnalysis, GapItem, QualityStats, QualityStatsInput};
 pub use smart_playlist::{
