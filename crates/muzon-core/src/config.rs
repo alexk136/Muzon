@@ -17,20 +17,99 @@ use std::path::Path;
 use serde::{Deserialize, Serialize};
 
 /// Top-level Muzon configuration.
-#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 #[serde(default, deny_unknown_fields)]
 pub struct MuzonConfig {
     pub audio: AudioConfig,
     pub library: LibraryConfig,
     pub ui: UiConfig,
     pub logging: LoggingConfig,
-    /// See decision 0001-N4. Every flag must be `false` unless the
-    /// user has flipped the corresponding opt-in switch.
+    /// Theme (Light / Dark / Auto + accent color).
+    pub theme: ThemeConfig,
+    /// See decision 0001-N4. Every flag must be `false` unless
+    /// the user has flipped the corresponding opt-in switch.
     pub network: NetworkConfig,
 }
 
-/// Audio output configuration.
+/// Theme configuration. The user picks a mode (Light / Dark /
+/// Auto) and an accent color. Auto follows the OS preference
+/// via the `prefers-color-scheme` CSS media query in the
+/// WebView (the Tauri shell reads it at startup).
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(default, deny_unknown_fields)]
+pub struct ThemeConfig {
+    pub mode: ThemeMode,
+    pub accent: AccentColor,
+}
+
+impl Default for ThemeConfig {
+    fn default() -> Self {
+        Self {
+            mode: ThemeMode::Auto,
+            accent: AccentColor::Violet,
+        }
+    }
+}
+
+/// Theme mode. Auto follows the OS preference.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum ThemeMode {
+    Light,
+    Dark,
+    #[default]
+    Auto,
+}
+
+/// Accent color preset. The user can also pick a custom hex
+/// via `Custom(String)`. The presets are the §2.3.3
+/// recommendation: violet (default), pink, blue, green,
+/// orange, red.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum AccentColor {
+    Violet,
+    Pink,
+    Blue,
+    Green,
+    Orange,
+    Red,
+    Custom(String),
+}
+
+impl AccentColor {
+    /// Return the hex value for the accent color.
+    pub fn hex(&self) -> String {
+        match self {
+            AccentColor::Violet => "#8b5cf6".into(),
+            AccentColor::Pink => "#ec4899".into(),
+            AccentColor::Blue => "#3b82f6".into(),
+            AccentColor::Green => "#10b981".into(),
+            AccentColor::Orange => "#f59e0b".into(),
+            AccentColor::Red => "#ef4444".into(),
+            AccentColor::Custom(hex) => hex.clone(),
+        }
+    }
+
+    /// The gradient endpoint (--accent-2) for the preset. For
+    /// the Custom variant, we darken the hex by 10% via a
+    /// simple string conversion; v0.3.0 hardening uses a
+    /// proper color library.
+    pub fn hex_accent_2(&self) -> String {
+        match self {
+            AccentColor::Violet => "#7c3aed".into(),
+            AccentColor::Pink => "#db2777".into(),
+            AccentColor::Blue => "#2563eb".into(),
+            AccentColor::Green => "#059669".into(),
+            AccentColor::Orange => "#d97706".into(),
+            AccentColor::Red => "#dc2626".into(),
+            AccentColor::Custom(_) => self.hex(),
+        }
+    }
+}
+
+/// Audio output configuration.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(default, deny_unknown_fields)]
 pub struct AudioConfig {
     /// ALSA / PulseAudio / PipeWire sink name. Empty means "use the

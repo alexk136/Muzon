@@ -23,6 +23,7 @@ use std::path::{Path, PathBuf};
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
+pub mod css;
 pub mod installer;
 pub mod loader;
 pub mod validator;
@@ -154,6 +155,7 @@ pub fn builtin_skins_root() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("skins")
 }
 
+pub use css::{apply_accent, extract_variable, missing_required_variables};
 pub use installer::{install_directory, install_zip, list_installed, InstallError};
 pub use loader::{load_directory, load_zip, LoaderError};
 pub use validator::{

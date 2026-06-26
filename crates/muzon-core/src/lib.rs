@@ -11,8 +11,8 @@ pub mod logging;
 pub mod paths;
 
 pub use config::{
-    AudioConfig, ConfigError, LibraryConfig, LoggingConfig, MuzonConfig, NetworkConfig,
-    ReplayGainMode, Theme, UiConfig,
+    AccentColor, AudioConfig, ConfigError, LibraryConfig, LoggingConfig, MuzonConfig,
+    NetworkConfig, ReplayGainMode, Theme, ThemeConfig, ThemeMode, UiConfig,
 };
 pub use logging::{init_logging, LoggingError, LoggingGuard};
 pub use paths::{MuzonPaths, PathsError};
