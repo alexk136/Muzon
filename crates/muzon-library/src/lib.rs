@@ -7,14 +7,19 @@
 //! land in issue 0007; the scanner / watcher / tags land in 0008;
 //! the search + facets + playback log land in 0013.
 
+pub mod autotag;
 pub mod db;
 pub mod features;
+pub mod musicbrainz;
 pub mod path_parse;
 pub mod playback_log;
 pub mod scanner;
 pub mod schema;
 pub mod search;
 pub mod tags;
+
+pub use autotag::{AutoTagMatch, AutoTagger};
+pub use musicbrainz::{Artist, MusicBrainzClient, MusicBrainzError, Recording, Release};
 
 #[cfg(test)]
 pub mod test_lock {
