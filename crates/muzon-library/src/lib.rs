@@ -8,6 +8,7 @@
 //! the search + facets + playback log land in 0013.
 
 pub mod db;
+pub mod features;
 pub mod path_parse;
 pub mod playback_log;
 pub mod scanner;
@@ -28,6 +29,9 @@ pub mod test_lock {
 }
 
 pub use db::Library;
+pub use features::{
+    extract_bpm, extract_key, extract_loudness_lufs, EnergyFeatures, KeyEstimate, Loudness,
+};
 pub use path_parse::{parse_path, ParsedPath};
 pub use playback_log::{today_stats, DailyStat};
 pub use scanner::{is_audio_file, ScanEvent, Scanner, DEBOUNCE_WINDOW};

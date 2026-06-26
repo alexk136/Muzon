@@ -12,9 +12,11 @@ description = "Muzon library: scan, watch, tags, SQLite, FTS5, embeddings."
 muzon-core = { workspace = true }
 muzon-ipc = { workspace = true }
 anyhow = { workspace = true }
+ebur128 = "0.1"
 lofty = "0.21"
 notify = "6.1"
 notify-debouncer-full = "0.3"
+rustfft = "6.2"
 serde = { workspace = true }
 sqlx = { version = "0.8", default-features = false, features = ["runtime-tokio", "sqlite", "macros", "migrate"] }
 thiserror = { workspace = true }
