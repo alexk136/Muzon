@@ -2610,6 +2610,7 @@ dependencies = [
  "anyhow",
  "lofty",
  "muzon-core",
+ "muzon-ipc",
  "notify",
  "notify-debouncer-full",
  "serde",

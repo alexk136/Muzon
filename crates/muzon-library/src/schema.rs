@@ -246,6 +246,7 @@ pub type DbPool = Pool<Sqlite>;
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::test_lock::ENV_LOCK;
     use muzon_core::MuzonPaths;
 
     #[test]
@@ -270,6 +271,7 @@ mod tests {
 
     #[tokio::test]
     async fn upsert_then_fetch_round_trip() {
+        let _g = ENV_LOCK.lock().expect("env lock poisoned");
         let tmp = tempfile::tempdir().expect("tempdir");
         let lib = Library::open_at(tmp.path().join("library.db"))
             .await
@@ -291,6 +293,7 @@ mod tests {
 
     #[tokio::test]
     async fn fts_round_trip() {
+        let _g = ENV_LOCK.lock().expect("env lock poisoned");
         let tmp = tempfile::tempdir().expect("tempdir");
         let lib = Library::open_at(tmp.path().join("library.db"))
             .await
@@ -308,6 +311,7 @@ mod tests {
 
     #[tokio::test]
     async fn fts_triggers_keep_index_in_sync() {
+        let _g = ENV_LOCK.lock().expect("env lock poisoned");
         let tmp = tempfile::tempdir().expect("tempdir");
         let lib = Library::open_at(tmp.path().join("library.db"))
             .await
@@ -338,6 +342,7 @@ mod tests {
 
     #[tokio::test]
     async fn open_default_uses_muzon_paths() {
+        let _g = ENV_LOCK.lock().expect("env lock poisoned");
         let tmp = tempfile::tempdir().expect("tempdir");
         std::env::set_var("MUZON_HOME", tmp.path());
         let paths = MuzonPaths::resolve().expect("resolve");

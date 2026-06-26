@@ -126,10 +126,12 @@ fn migrations_present() -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::test_lock::ENV_LOCK;
     use muzon_core::MuzonPaths;
 
     #[tokio::test]
     async fn open_at_creates_and_migrates() {
+        let _g = ENV_LOCK.lock().expect("env lock poisoned");
         let tmp = tempfile::tempdir().expect("tempdir");
         let path = tmp.path().join("library.db");
         let lib = Library::open_at(&path).await.expect("open");
@@ -166,6 +168,7 @@ mod tests {
 
     #[tokio::test]
     async fn wal_mode_active() {
+        let _g = ENV_LOCK.lock().expect("env lock poisoned");
         let tmp = tempfile::tempdir().expect("tempdir");
         let lib = Library::open_at(tmp.path().join("library.db"))
             .await
@@ -176,6 +179,7 @@ mod tests {
 
     #[tokio::test]
     async fn migration_idempotent() {
+        let _g = ENV_LOCK.lock().expect("env lock poisoned");
         let tmp = tempfile::tempdir().expect("tempdir");
         let path = tmp.path().join("library.db");
         // Open twice; the second open must be a no-op.
@@ -187,11 +191,18 @@ mod tests {
                 .fetch_all(lib.pool())
                 .await
                 .expect("query");
-        assert_eq!(applied, vec![1], "expected exactly migration 1 applied, got {applied:?}");
+        // The v0.2.0 baseline applies migrations 1 (initial)
+        // and 3 (playback_log, 0013). Migration 2 is reserved
+        // for the album-art column that 0008 documented but
+        // did not yet ship; the v0.2.0 hardening pass will add
+        // 0002_album_art.sql. Future migrations extend this
+        // list.
+        assert_eq!(applied, vec![1, 3], "expected migrations 1, 3 applied, got {applied:?}");
     }
 
     #[tokio::test]
     async fn open_with_muzon_paths_uses_data_dir() {
+        let _g = ENV_LOCK.lock().expect("env lock poisoned");
         let tmp = tempfile::tempdir().expect("tempdir");
         std::env::set_var("MUZON_HOME", tmp.path());
         let paths = MuzonPaths::resolve().expect("resolve");
@@ -208,6 +219,7 @@ mod tests {
 
     #[tokio::test]
     async fn foreign_keys_enforced() {
+        let _g = ENV_LOCK.lock().expect("env lock poisoned");
         let tmp = tempfile::tempdir().expect("tempdir");
         let lib = Library::open_at(tmp.path().join("library.db"))
             .await

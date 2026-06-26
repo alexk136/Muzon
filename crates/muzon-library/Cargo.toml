@@ -10,6 +10,7 @@ description = "Muzon library: scan, watch, tags, SQLite, FTS5, embeddings."
 
 [dependencies]
 muzon-core = { workspace = true }
+muzon-ipc = { workspace = true }
 anyhow = { workspace = true }
 lofty = "0.21"
 notify = "6.1"
