@@ -10,10 +10,12 @@ description = "Muzon audio: GStreamer playbin3 wrapper, gapless, ReplayGain, bit
 
 [dependencies]
 muzon-core = { workspace = true }
+muzon-ipc = { workspace = true }
 anyhow = { workspace = true }
 glib = "0.20"
 gstreamer = { workspace = true }
 gstreamer-audio = { workspace = true }
 gstreamer-video = { workspace = true }
+rand = "0.8"
 thiserror = { workspace = true }
 tracing = { workspace = true }

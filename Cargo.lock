@@ -2551,6 +2551,8 @@ dependencies = [
  "gstreamer-audio",
  "gstreamer-video",
  "muzon-core",
+ "muzon-ipc",
+ "rand",
  "thiserror 1.0.69",
  "tracing",
 ]
