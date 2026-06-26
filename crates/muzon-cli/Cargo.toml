@@ -1,0 +1,20 @@
+[package]
+name = "muzon-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "Muzon CLI binary: muzon play, queue, playlist, library, skin subcommands."
+
+[[bin]]
+name = "muzon"
+path = "src/main.rs"
+
+[dependencies]
+muzon-core = { workspace = true }
+muzon-library = { workspace = true }
+muzon-audio = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }

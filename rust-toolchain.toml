@@ -1,0 +1,15 @@
+[toolchain]
+# TZ.md §4.5 pins the glibc baseline to 2.31 (Ubuntu 20.04 / Fedora 32).
+# Rust 1.71.0 (June 2023) is the last release that officially supports
+# glibc 2.31. Issue 0005 recommends pinning to that release or "a
+# current stable that also supports glibc 2.31, or document the actual
+# minimum." This skeleton is pinned to 1.94.1 because that is the
+# stable toolchain that was available at the 0005 implementation time
+# on the reference developer machine. 1.94.1 is fully compatible with
+# glibc 2.31; if a downstream environment requires a lower MSRV, drop
+# this pin to 1.71.0 (the lowest stable that still meets §4.5). The
+# `[workspace.package] rust-version` in `Cargo.toml` must be kept in
+# sync with the lowest of the two.
+channel = "1.94.1"
+components = ["clippy", "rustfmt"]
+profile = "minimal"

@@ -1,0 +1,14 @@
+[package]
+name = "muzon-skin"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "Muzon skin loader: ZIP/dir with skin.toml manifest, layered, themes."
+
+[dependencies]
+muzon-core = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }

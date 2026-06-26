@@ -1,0 +1,52 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/muzon-core",
+    "crates/muzon-library",
+    "crates/muzon-audio",
+    "crates/muzon-musiclab",
+    "crates/muzon-skin",
+    "crates/muzon-cli",
+    "crates/muzon-ipc",
+    "crates/muzon-ui",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.94"
+license = "MIT OR Apache-2.0"
+authors = ["Muzon contributors"]
+repository = "https://github.com/musiclab/muzon"
+homepage = "https://muzon.rs"
+documentation = "https://docs.rs/muzon-core"
+readme = "README.md"
+keywords = ["audio", "player", "linux", "music", "collection"]
+categories = ["multimedia::audio", "filesystem"]
+
+[workspace.dependencies]
+# Internal crates
+muzon-core = { path = "crates/muzon-core", version = "0.1.0" }
+muzon-library = { path = "crates/muzon-library", version = "0.1.0" }
+muzon-audio = { path = "crates/muzon-audio", version = "0.1.0" }
+muzon-musiclab = { path = "crates/muzon-musiclab", version = "0.1.0" }
+muzon-skin = { path = "crates/muzon-skin", version = "0.1.0" }
+muzon-cli = { path = "crates/muzon-cli", version = "0.1.0" }
+muzon-ipc = { path = "crates/muzon-ipc", version = "0.1.0" }
+muzon-ui = { path = "crates/muzon-ui", version = "0.1.0" }
+
+# Third-party
+anyhow = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+tracing-appender = "0.2"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "symbols"
+
+[profile.dev]
+incremental = true

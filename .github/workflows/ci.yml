@@ -1,0 +1,158 @@
+name: ci
+
+on:
+  push:
+    branches: [main, master, developer]
+  pull_request:
+    branches: [main, master, developer]
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-D warnings"
+  RUST_BACKTRACE: "1"
+
+jobs:
+  lint:
+    name: fmt + clippy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        run: rustup show active-toolchain || rustup toolchain install
+      - name: Cache cargo registry and target
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('rust-toolchain.toml', '**/Cargo.toml', '**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+      - name: cargo fmt --check
+        run: cargo fmt --all -- --check
+      - name: cargo clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+  test:
+    name: test (ubuntu)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        run: rustup show active-toolchain || rustup toolchain install
+      - name: Install GStreamer dev packages (for later audio tests)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgstreamer1.0-dev \
+            libgstreamer-plugins-base1.0-dev \
+            libgstreamer-plugins-good1.0-dev \
+            libgstreamer-plugins-bad1.0-dev \
+            gstreamer1.0-plugins-ugly \
+            gstreamer1.0-libav \
+            libsqlite3-dev
+      - name: Cache cargo registry and target
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('rust-toolchain.toml', '**/Cargo.toml', '**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+      - name: cargo build --workspace
+        run: cargo build --workspace
+      - name: cargo test --workspace
+        run: cargo test --workspace --no-fail-fast
+
+  deny:
+    name: cargo-deny
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        run: rustup show active-toolchain || rustup toolchain install
+      - name: Cache cargo registry and target
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('rust-toolchain.toml', '**/Cargo.toml', '**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+      - name: Install cargo-deny
+        run: cargo install --locked cargo-deny
+      - name: cargo deny check
+        run: cargo deny check
+
+  distro-matrix:
+    name: build (${{ matrix.distro }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - distro: ubuntu
+            image: ubuntu:24.04
+            packages: |
+              libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+              libgstreamer-plugins-good1.0-dev libgstreamer-plugins-bad1.0-dev
+              gstreamer1.0-plugins-ugly gstreamer1.0-libav libsqlite3-dev
+          - distro: fedora
+            image: fedora:41
+            packages: |
+              gcc gcc-c++ make pkgconf-pkg-config
+              gstreamer1-devel gstreamer1-plugins-base-devel
+              gstreamer1-plugins-good gstreamer1-plugins-bad-free
+              gstreamer1-plugins-ugly gstreamer1-libav sqlite-devel
+            status: skip
+          - distro: arch
+            image: archlinux:latest
+            packages: |
+              base-devel gstreamer gst-plugins-base gst-plugins-good
+              gst-plugins-bad gst-plugins-ugly gst-libav sqlite
+            status: skip
+          - distro: nixos
+            image: nixos/nix:2.24
+            packages: ""
+            status: skip
+    container:
+      image: ${{ matrix.image }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skip if matrix entry is marked as such
+        if: matrix.status == 'skip'
+        run: |
+          echo "::warning title=distro skipped::${{ matrix.distro }} is intentionally skipped in v0.1.0; the path forward is documented in TZ.md §5 v0.1.0 deliverable and issue 0005's Required Test Coverage."
+          exit 0
+      - name: Install build deps
+        if: matrix.status != 'skip'
+        run: |
+          if command -v apt-get >/dev/null 2>&1; then
+            apt-get update
+            DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ${{ matrix.packages }}
+          elif command -v dnf >/dev/null 2>&1; then
+            dnf install -y ${{ matrix.packages }}
+          elif command -v pacman >/dev/null 2>&1; then
+            pacman -Syu --noconfirm ${{ matrix.packages }}
+          fi
+      - name: Install Rust toolchain
+        if: matrix.status != 'skip'
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain none
+          . "$HOME/.cargo/env"
+          rustup show active-toolchain || rustup toolchain install
+      - name: cargo build --workspace
+        if: matrix.status != 'skip'
+        run: |
+          . "$HOME/.cargo/env"
+          cargo build --workspace
+      - name: cargo test --workspace
+        if: matrix.status != 'skip'
+        run: |
+          . "$HOME/.cargo/env"
+          cargo test --workspace --no-fail-fast

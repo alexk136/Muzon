@@ -1,0 +1,35 @@
+/.symposium
+/Makefile.agent
+/memory.json
+.env
+/prompts
+
+# Rust build artifacts
+/target/
+**/*.rs.bk
+*.pdb
+*.d
+*.o
+*.so
+*.dylib
+*.dll
+
+# Cargo: keep Cargo.lock for application crates (this project is an
+# application per TZ §3.1.1). Library-only crates ignore it; we don't
+# have any.
+# Cargo.lock MUST be committed — do NOT add /Cargo.lock to .gitignore.
+
+# IDE
+/.idea/
+/.vscode/
+*.swp
+*.swo
+
+# Local Flatpak build outputs
+/flatpak/build/
+/flatpak/.flatpak-builder/
+/.flatpak-builder/
+
+# OS
+.DS_Store
+Thumbs.db

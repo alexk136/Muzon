@@ -1,0 +1,16 @@
+[package]
+name = "muzon-library"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "Muzon library: scan, watch, tags, SQLite, FTS5, embeddings."
+
+[dependencies]
+muzon-core = { workspace = true }
+anyhow = { workspace = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }

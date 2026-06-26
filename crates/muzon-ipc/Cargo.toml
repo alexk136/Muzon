@@ -1,0 +1,14 @@
+[package]
+name = "muzon-ipc"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "Muzon IPC: Unix socket (XDG_RUNTIME_DIR) and D-Bus surface for headless muzon-core."
+
+[dependencies]
+muzon-core = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
