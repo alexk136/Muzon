@@ -17,11 +17,13 @@ pub mod playback_log;
 pub mod scanner;
 pub mod schema;
 pub mod search;
+pub mod tagwrite;
 pub mod tags;
 
 pub use autotag::{AutoTagMatch, AutoTagger};
 pub use duplicates::{find_duplicates, DuplicateGroup, Strategy, TrackForDedup};
 pub use musicbrainz::{Artist, MusicBrainzClient, MusicBrainzError, Recording, Release};
+pub use tagwrite::{write_tags_with_backup, TagEdit, TagWriteError};
 
 #[cfg(test)]
 pub mod test_lock {
