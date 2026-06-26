@@ -22,6 +22,7 @@ pub mod search;
 pub mod smart_playlist;
 pub mod tagwrite;
 pub mod tags;
+pub mod vec_index;
 
 pub use autotag::{AutoTagMatch, AutoTagger};
 pub use duplicates::{find_duplicates, DuplicateGroup, Strategy, TrackForDedup};
@@ -33,6 +34,7 @@ pub use smart_playlist::{
     SmartPlaylist, TrackSnapshot,
 };
 pub use tagwrite::{write_tags_with_backup, TagEdit, TagWriteError};
+pub use vec_index::{cosine, IndexedVector, VecError, VecIndex};
 
 #[cfg(test)]
 pub mod test_lock {
