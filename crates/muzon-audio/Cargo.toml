@@ -11,4 +11,9 @@ description = "Muzon audio: GStreamer playbin3 wrapper, gapless, ReplayGain, bit
 [dependencies]
 muzon-core = { workspace = true }
 anyhow = { workspace = true }
+glib = "0.20"
+gstreamer = { workspace = true }
+gstreamer-audio = { workspace = true }
+gstreamer-video = { workspace = true }
+thiserror = { workspace = true }
 tracing = { workspace = true }
