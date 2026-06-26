@@ -13,12 +13,19 @@
 //! in v0.3.0 (issue 0016); v0.2.0 ships the four built-ins and
 //! the public `Skin`, `SkinManifest`, `builtin_skins`,
 //! `default_skin`, `load_skin`, `validate`, and `render` API.
+//! Since 0016: the user-installed skin package format and
+//! loader (ZIP + dir), the validator, and the installer that
+//! drops the package into `~/.local/share/muzon/skins/<id>/`.
 
 use std::fs;
 use std::path::{Path, PathBuf};
 
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
+
+pub mod installer;
+pub mod loader;
+pub mod validator;
 
 /// The four built-in skin ids. Stable identifiers in code and
 /// config. See `docs/decisions/0005-skins-and-default-theme.md`.
@@ -146,6 +153,15 @@ pub struct Skin {
 pub fn builtin_skins_root() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("skins")
 }
+
+pub use installer::{install_directory, install_zip, list_installed, InstallError};
+pub use loader::{load_directory, load_zip, LoaderError};
+pub use validator::{
+    check_font_license, validate_manifest, validate_package_layout, ValidatorError, MAX_FILES,
+    MAX_UNCOMPRESSED_BYTES,
+};
+
+/// Return the default skin id (`"modern"` per the 0005 decision).
 
 /// Return the default skin id (`"modern"` per the 0005 decision).
 pub fn default_skin() -> &'static str {
