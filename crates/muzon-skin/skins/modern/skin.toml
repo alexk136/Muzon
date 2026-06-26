@@ -13,7 +13,7 @@ palette = "theme.css"
 
 [layout]
 main_template = "index.html.tmpl"
-mini_template = ""
+mini_template = "mini.html.tmpl"
 grid = "topbar-sidebar-main-player"
 
 [layers]

@@ -1,0 +1,24 @@
+<div class="mini">
+  <div class="mini-cover">♪</div>
+  <div class="mini-info">
+    <div class="mini-title">{{track_title}}</div>
+    <div class="mini-artist">{{track_artist}}</div>
+  </div>
+  <div class="mini-spectrum" aria-label="Spectrum">
+    {{spectrum_bars}}
+  </div>
+  <div class="mini-progress">
+    <div class="mini-progress-bar"><div class="mini-progress-fill" style="width: {{progress_pct}}%;"></div></div>
+    <div class="mini-times">
+      <span>{{position_label}}</span>
+      <span>{{duration_label}}</span>
+    </div>
+  </div>
+  <div class="mini-buttons">
+    <button class="mini-btn" title="Shuffle">SHF</button>
+    <button class="mini-btn" title="Previous">PRE</button>
+    <button class="mini-btn play" title="Play/Pause">{{play_pause_label}}</button>
+    <button class="mini-btn" title="Next">NXT</button>
+    <button class="mini-btn" title="Repeat">RPT</button>
+  </div>
+</div>
