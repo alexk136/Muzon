@@ -33,3 +33,9 @@
 # OS
 .DS_Store
 Thumbs.db
+/Issues
+TZ.md
+themes.html
+.gitignore
+musiclab.html
+processed_reports.json
