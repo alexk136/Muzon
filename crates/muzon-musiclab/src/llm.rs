@@ -2,8 +2,10 @@
 //! LLM provider abstraction.
 //!
 //! v0.6.0 minimum: the typed request/response types and the
-//! `LlmProvider` enum. v0.6.0 hardening adds the actual
-//! `reqwest` integration for each provider.
+//! `LlmProvider` enum, the opt-in enforcement (per decision
+//! 0001-N4), and a collection-context payload builder. v0.6.0
+//! hardening adds the actual `reqwest` integration for each
+//! provider.
 //!
 //! See TZ §3.5.4 for the contract; the providers are
 //! Ollama (local, default), OpenAI, Anthropic, and
@@ -13,6 +15,7 @@
 //! schema.
 
 use serde::{Deserialize, Serialize};
+use thiserror::Error;
 
 /// LLM provider kind.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Serialize, Deserialize)]
@@ -89,6 +92,63 @@ impl LlmResponse {
     }
 }
 
+/// Errors produced by the LLM provider abstraction.
+#[derive(Debug, Error)]
+pub enum LlmError {
+    #[error("opt-in required: LLM providers are gated by `network.llm_providers` per decision 0001-N4")]
+    OptInRequired,
+    #[error("missing API key for provider {0:?}")]
+    MissingApiKey(LlmProvider),
+    #[error("network error: {0}")]
+    Network(String),
+    #[error("invalid response: {0}")]
+    InvalidResponse(String),
+    #[error("provider error: {0}")]
+    Provider(String),
+}
+
+/// A collection-context payload that the LLM receives as
+/// the system prompt. v0.6.0 minimum: a typed struct that
+/// summarises the library's stats (track count, artist count,
+/// album count, total size, total duration); the user can
+/// ask the LLM "find similar tracks" or "what's missing" and
+/// the LLM has the context to answer.
+#[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, Deserialize)]
+pub struct CollectionContext {
+    pub track_count: u32,
+    pub artist_count: u32,
+    pub album_count: u32,
+    pub total_size_bytes: u64,
+    pub total_duration_ms: u64,
+}
+
+impl CollectionContext {
+    /// Render the context as a system prompt.
+    pub fn to_system_prompt(&self) -> String {
+        format!(
+            "You are an AI music expert. The user's library has {} tracks, \
+             {} artists, {} albums, {:.1} MB total, {:.1} minutes total. \
+             Answer the user's questions about the library concisely.",
+            self.track_count,
+            self.artist_count,
+            self.album_count,
+            self.total_size_bytes as f64 / 1_000_000.0,
+            self.total_duration_ms as f64 / 60_000.0,
+        )
+    }
+}
+
+/// Opt-in enforcement. v0.6.0 minimum: a typed check; the
+/// caller is responsible for reading the `network.llm_providers`
+/// flag from the config (per decision 0001-N4).
+pub fn check_opt_in(enabled: bool) -> Result<(), LlmError> {
+    if enabled {
+        Ok(())
+    } else {
+        Err(LlmError::OptInRequired)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -123,5 +183,26 @@ mod tests {
             ..Default::default()
         };
         assert!(!r.is_empty());
+    }
+
+    #[test]
+    fn opt_in_enforced() {
+        assert!(check_opt_in(false).is_err());
+        assert!(check_opt_in(true).is_ok());
+    }
+
+    #[test]
+    fn collection_context_to_system_prompt() {
+        let ctx = CollectionContext {
+            track_count: 1000,
+            artist_count: 250,
+            album_count: 150,
+            total_size_bytes: 90_000_000_000,
+            total_duration_ms: 4_320_000_000, // 72 hours = 4320 min
+        };
+        let prompt = ctx.to_system_prompt();
+        assert!(prompt.contains("1000 tracks"));
+        assert!(prompt.contains("250 artists"));
+        assert!(prompt.contains("150 albums"));
     }
 }
