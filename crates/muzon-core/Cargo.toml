@@ -11,8 +11,13 @@ description = "Muzon core: domain types, errors, config, paths, logging."
 
 [dependencies]
 anyhow = { workspace = true }
+directories = "5.0"
 serde = { workspace = true }
 thiserror = { workspace = true }
+toml = "0.8"
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 tracing-appender = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3.10"

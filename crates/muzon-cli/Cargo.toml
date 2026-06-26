@@ -18,3 +18,6 @@ muzon-library = { workspace = true }
 muzon-audio = { workspace = true }
 anyhow = { workspace = true }
 tracing = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3.10"
