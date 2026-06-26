@@ -10,6 +10,7 @@
 pub mod autotag;
 pub mod db;
 pub mod duplicates;
+pub mod embeddings;
 pub mod features;
 pub mod musicbrainz;
 pub mod path_parse;
@@ -24,6 +25,7 @@ pub mod tags;
 
 pub use autotag::{AutoTagMatch, AutoTagger};
 pub use duplicates::{find_duplicates, DuplicateGroup, Strategy, TrackForDedup};
+pub use embeddings::{compute_embedding, estimate_embed_time, Embedding, Model};
 pub use musicbrainz::{Artist, MusicBrainzClient, MusicBrainzError, Recording, Release};
 pub use quality::{build_gap_analysis, compute_quality_stats, GapAnalysis, GapItem, QualityStats, QualityStatsInput};
 pub use smart_playlist::{
