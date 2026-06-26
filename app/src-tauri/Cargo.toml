@@ -1,0 +1,33 @@
+[package]
+name = "muzon-app"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "Muzon Tauri 2.x application shell (UI process)."
+
+[lib]
+name = "muzon_app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "muzon-app"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+muzon-core = { workspace = true }
+muzon-audio = { workspace = true }
+muzon-library = { workspace = true }
+muzon-ipc = { workspace = true }
+muzon-skin = { workspace = true }
+muzon-ui = { workspace = true }
+serde = { workspace = true }
+serde_json = "1.0"
+tauri = { version = "2", features = [] }
+thiserror = { workspace = true }
+tracing = { workspace = true }

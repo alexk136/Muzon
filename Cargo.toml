@@ -9,6 +9,7 @@ members = [
     "crates/muzon-cli",
     "crates/muzon-ipc",
     "crates/muzon-ui",
+    "app/src-tauri",
 ]
 
 [workspace.package]

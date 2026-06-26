@@ -2542,6 +2542,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "956787520e75e9bd233246045d19f42fb73242759cc57fba9611d940ae96d4b0"
 
 [[package]]
+name = "muzon-app"
+version = "0.1.0"
+dependencies = [
+ "muzon-audio",
+ "muzon-core",
+ "muzon-ipc",
+ "muzon-library",
+ "muzon-skin",
+ "muzon-ui",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "thiserror 1.0.69",
+ "tracing",
+]
+
+[[package]]
 name = "muzon-audio"
 version = "0.1.0"
 dependencies = [

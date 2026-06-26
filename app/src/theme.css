@@ -1,0 +1,28 @@
+/* Modern Skin palette placeholder.
+ *
+ * The active skin's full theme.css is injected at runtime by
+ * the Rust shell via the `get_active_skin` IPC command. This
+ * file is a fallback so the UI renders correctly when the IPC
+ * is unavailable (e.g. when the app is opened directly in a
+ * browser during development).
+ */
+
+:root {
+    --bg-0: #0a0a0c;
+    --bg-1: #131318;
+    --bg-2: #1c1c24;
+    --bg-3: #26262f;
+    --border: #2a2a35;
+    --text-0: #f5f5f7;
+    --text-1: #b0b0b8;
+    --text-2: #6a6a75;
+    --accent: #8b5cf6;
+    --accent-2: #ec4899;
+}
+
+body {
+    margin: 0;
+    background: var(--bg-0);
+    color: var(--text-0);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+}
